@@ -75,8 +75,8 @@ def start(update: Update, context: CallbackContext):
     users_collection.update_one({"_id": "user_data"}, {"$set": {"users": list(user_data)}}, upsert=True)
 
     welcome_message = (
-        "ᴀʟʟ ᴄᴏʟᴏᴜʀ ᴛʀᴀᴅɪɴɢ ₹100-500 ʙɪɢ ɢɪꜰᴛ ᴄᴏᴅᴇ ᴀᴠᴀɪʟᴀʙʟᴇ ɪɴ ʙᴏᴛ 📬🗒\n\n"
-        "🎁 ᴊᴜꜱᴛ ᴊᴏɪɴ ᴀʟʟ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ᴄʟᴀɪᴍ ᴀʟʟ ꜱɪᴛᴇꜱ ᴄᴏᴅᴇ 🚚"
+        "*ᴀʟʟ ᴄᴏʟᴏᴜʀ ᴛʀᴀᴅɪɴɢ ₹100-500 ʙɪɢ ɢɪꜰᴛ ᴄᴏᴅᴇ ᴀᴠᴀɪʟᴀʙʟᴇ ɪɴ ʙᴏᴛ* 📬🗒\n\n"
+        "*🎁 ᴊᴜꜱᴛ ᴊᴏɪɴ ᴀʟʟ ᴄʜᴀɴɴᴇʟ ᴀɴᴅ ᴄʟᴀɪᴍ ᴀʟʟ ꜱɪᴛᴇꜱ ᴄᴏᴅᴇ 🚚*"
     )
 
     # Create buttons for all required channels
@@ -126,9 +126,10 @@ def join_button_callback(update: Update, context: CallbackContext):
         try:
             context.bot.send_message(
                 chat_id=user.id,
-                text="🟢 Choose Desire App To Claim 🟢\n\n"
-                     "🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!\n\n"
-                     "🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓",
+                text="*🟢 Choose Desire App To Claim 🟢*\n\n"
+                     "*🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!*\n\n"
+                     "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
+                     "*⚠️ Expired gift code will refresh in a few hours ⏰ !!*",
                 reply_markup=reply_markup,
                 parse_mode=ParseMode.MARKDOWN
             )
