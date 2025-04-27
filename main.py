@@ -15,13 +15,13 @@ logger = logging.getLogger(__name__)
 BOT_TOKEN = '7679605071:AAFVQ2VNf5q-Ce0ev5YGDYj7H_Y6SB2gEQA'
 ADMIN_ID = 6490401448
 
-# Initialize empty channels list
-REQUIRED_CHANNELS = [1002629702845,1002436175379,1002125928281]
+# Initialize channels list
+REQUIRED_CHANNELS = []
 
 # MongoDB connection
 MONGO_URI = "mongodb+srv://giftcodebot:giftcodebotpass@giftcodebot.n3wkcog.mongodb.net/?retryWrites=true&w=majority&appName=giftcodebot"
 client = pymongo.MongoClient(MONGO_URI)
-db = client["giftcodebot"]  # Replace with your database name
+db = client["giftcodebot"]
 users_collection = db["users"]
 codes_collection = db["codes"]
 
@@ -36,7 +36,7 @@ def load_data() -> tuple[Set[int], Set[int], dict]:
     blocked_users = set(stored_data.get("blocked", []))
 
     global REQUIRED_CHANNELS
-    REQUIRED_CHANNELS = stored_channels.get("channels", ["@ruakakaesm"])
+    REQUIRED_CHANNELS = stored_channels.get("channels", [1002629702845,1002436175379,1002125928281])
 
     return user_data, blocked_users, stored_codes
 
@@ -45,7 +45,7 @@ user_codes = {}
 
 def get_channel_link(channel):
     try:
-        return f"https://t.me/{channel[1:]}" if channel.startswith('@') else f"https://t.me/c/{abs(channel)}"
+        return f"https://t.me/joinchat/{channel}" #assuming these are now just channel IDs
     except:
         return "Unknown"
 
@@ -84,10 +84,10 @@ def start(update: Update, context: CallbackContext):
     for i, channel in enumerate(REQUIRED_CHANNELS, 1):
         try:
             chat = context.bot.get_chat(channel)
-            invite_link = chat.invite_link or f"https://t.me/{channel[1:]}"
+            invite_link = chat.invite_link or f"https://t.me/joinchat/{channel}"
             keyboard.append([InlineKeyboardButton(f"Join Channel {i}", url=invite_link)])
         except TelegramError:
-            keyboard.append([InlineKeyboardButton(f"Join Channel {i}", url=f"https://t.me/{channel[1:]}")])
+            keyboard.append([InlineKeyboardButton(f"Join Channel {i}", url=f"https://t.me/joinchat/{channel}")])
 
     keyboard.append([InlineKeyboardButton("✅ Joined", callback_data="joined")])
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -360,33 +360,76 @@ def set_channel(update: Update, context: CallbackContext):
         return
 
     if not context.args:
-        update.message.reply_text("Please provide channel username or ID.")
+        update.message.reply_text("Please provide channel username or invite link.")
         return
 
-    channel = context.args[0]
-    if not channel.startswith('@') and not channel.startswith('-'):
-        channel = '@' + channel
-
-    global REQUIRED_CHANNELS
-    if len(REQUIRED_CHANNELS) >= 12:
-        update.message.reply_text("Maximum limit of 12 channels reached!")
-        return
-
-    if channel not in REQUIRED_CHANNELS:
-        REQUIRED_CHANNELS.append(channel)
-        codes_collection.update_one({"_id": "channels"}, {"$set": {"channels": REQUIRED_CHANNELS}}, upsert=True)
-
-    # Get channel information
+    channel_input = context.args[0]
+    
     try:
-        chat = context.bot.get_chat(channel)
-        invite_link = chat.invite_link or f"https://t.me/{channel[1:]}"
-        update.message.reply_text(
-            f"Added channel {len(REQUIRED_CHANNELS)}: {channel}\n"
-            f"Invite Link: {invite_link}\n"
-            f"Total channels: {len(REQUIRED_CHANNELS)}"
-        )
-    except TelegramError as e:
-        update.message.reply_text(f"Channel added but couldn't fetch invite link: {str(e)}")
+        # Handle different channel input formats
+        if channel_input.startswith('https://t.me/'):
+            if '/+' in channel_input or '/joinchat/' in channel_input:
+                # Private channel
+                channel_id = channel_input.split('/')[-1]
+                try:
+                    chat = context.bot.get_chat(channel_input)
+                    channel_id = chat.id
+                except:
+                    update.message.reply_text("Invalid channel link or bot is not admin in the channel.")
+                    return
+            else:
+                # Public channel
+                username = channel_input.split('/')[-1]
+                try:
+                    chat = context.bot.get_chat('@' + username)
+                    channel_id = chat.id
+                except:
+                    update.message.reply_text("Invalid channel username or bot is not admin in the channel.")
+                    return
+        elif channel_input.startswith('@'):
+            try:
+                chat = context.bot.get_chat(channel_input)
+                channel_id = chat.id
+            except:
+                update.message.reply_text("Invalid channel username or bot is not admin in the channel.")
+                return
+        else:
+            try:
+                # Try as channel ID
+                channel_id = int(channel_input)
+                chat = context.bot.get_chat(channel_id)
+            except:
+                update.message.reply_text("Invalid channel format. Use channel username, invite link, or ID.")
+                return
+
+        global REQUIRED_CHANNELS
+        if len(REQUIRED_CHANNELS) >= 12:
+            update.message.reply_text("Maximum limit of 12 channels reached!")
+            return
+
+        if channel_id not in REQUIRED_CHANNELS:
+            REQUIRED_CHANNELS.append(channel_id)
+            # Update MongoDB
+            try:
+                codes_collection.update_one(
+                    {"_id": "channels"},
+                    {"$set": {"channels": REQUIRED_CHANNELS}},
+                    upsert=True
+                )
+                # Get channel information
+                invite_link = chat.invite_link or f"https://t.me/joinchat/{channel_id}"
+                update.message.reply_text(
+                    f"✅ Added channel {len(REQUIRED_CHANNELS)}: {chat.title}\n"
+                    f"Channel ID: {channel_id}\n"
+                    f"Invite Link: {invite_link}\n"
+                    f"Total channels: {len(REQUIRED_CHANNELS)}"
+                )
+            except Exception as e:
+                update.message.reply_text(f"Error updating database: {str(e)}")
+        else:
+            update.message.reply_text("This channel is already in the list!")
+    except Exception as e:
+        update.message.reply_text(f"An error occurred: {str(e)}")
 
 def remove_channel(update: Update, context: CallbackContext):
     if update.effective_user.id != ADMIN_ID:
@@ -394,7 +437,7 @@ def remove_channel(update: Update, context: CallbackContext):
         return
 
     if not context.args:
-        update.message.reply_text("Please provide channel username/ID or 'channel NUMBER' to remove.")
+        update.message.reply_text("Please provide channel ID or 'channel NUMBER' to remove.")
         return
 
     global REQUIRED_CHANNELS
@@ -405,10 +448,19 @@ def remove_channel(update: Update, context: CallbackContext):
             channel_num = int(context.args[1])
             if 1 <= channel_num <= len(REQUIRED_CHANNELS):
                 removed_channel = REQUIRED_CHANNELS.pop(channel_num - 1)
-                update.message.reply_text(
-                    f"Successfully removed channel {channel_num}: {removed_channel}\n"
-                    f"Total channels: {len(REQUIRED_CHANNELS)}"
-                )
+                # Update MongoDB
+                try:
+                    codes_collection.update_one(
+                        {"_id": "channels"},
+                        {"$set": {"channels": REQUIRED_CHANNELS}},
+                        upsert=True
+                    )
+                    update.message.reply_text(
+                        f"✅ Successfully removed channel {channel_num}: {removed_channel}\n"
+                        f"Total channels: {len(REQUIRED_CHANNELS)}"
+                    )
+                except Exception as e:
+                    update.message.reply_text(f"Error updating database: {str(e)}")
             else:
                 update.message.reply_text(f"Invalid channel number. Please use 1 to {len(REQUIRED_CHANNELS)}")
             return
@@ -416,20 +468,29 @@ def remove_channel(update: Update, context: CallbackContext):
             update.message.reply_text("Invalid channel number format")
             return
 
-    # Handle removal by channel username/ID
-    channel = context.args[0]
-    if not channel.startswith('@') and not channel.startswith('-'):
-        channel = '@' + channel
+    # Handle removal by channel ID
+    try:
+        channel = int(context.args[0])  # Convert to integer since we're using channel IDs
+        if channel in REQUIRED_CHANNELS:
+            REQUIRED_CHANNELS.remove(channel)
+            # Update MongoDB
+            try:
+                codes_collection.update_one(
+                    {"_id": "channels"},
+                    {"$set": {"channels": REQUIRED_CHANNELS}},
+                    upsert=True
+                )
+                update.message.reply_text(
+                    f"✅ Successfully removed channel: {channel}\n"
+                    f"Total channels: {len(REQUIRED_CHANNELS)}"
+                )
+            except Exception as e:
+                update.message.reply_text(f"Error updating database: {str(e)}")
+        else:
+            update.message.reply_text(f"Channel {channel} not found in required channels list")
+    except ValueError:
+        update.message.reply_text("Please provide a valid channel ID (numbers only)")
 
-    if channel in REQUIRED_CHANNELS:
-        REQUIRED_CHANNELS.remove(channel)
-        codes_collection.update_one({"_id": "channels"}, {"$set": {"channels": REQUIRED_CHANNELS}}, upsert=True)
-        update.message.reply_text(
-            f"Successfully removed channel: {channel}\n"
-            f"Total channels: {len(REQUIRED_CHANNELS)}"
-        )
-    else:
-        update.message.reply_text(f"Channel {channel} not found in required channels list")
 
 
 def main():
@@ -446,7 +507,7 @@ def main():
     dp.add_handler(CommandHandler("setjalwagame", set_jalwa_code))
     dp.add_handler(CommandHandler("setdiuwin", set_diuwin_code))
     dp.add_handler(CommandHandler("settashanwin", set_tashan_code))
-    dp.add_handler(CommandHandler("setchannel", set_channel))
+    dp.add_handler(CommandHandler("set_channel", set_channel))
     dp.add_handler(CommandHandler("removechannel", remove_channel))
     dp.add_handler(CallbackQueryHandler(join_button_callback, pattern="joined"))
     dp.add_handler(CallbackQueryHandler(handle_app_buttons, pattern="^(diuwin|jalwa|tashan|back|number_hack)$"))
