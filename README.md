@@ -14,8 +14,8 @@ User Commands:
 
 Admin Commands:
 
-/set_channel — ➕ Add a new update channel. /n
-/removechannel — ➖ Remove an existing channel./n
+/set_channel — ➕ Add a new update channel.
+/removechannel — ➖ Remove an existing channel.
 /setdiuwin — 🎯 Set Gift Code for "DIU" game.
 /setjalwagame — 🎯 Set Gift Code for "Jalwa" game.
 /settashanwin — 🎯 Set Gift Code for "Tashan" game.
