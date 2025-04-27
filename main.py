@@ -126,10 +126,9 @@ def join_button_callback(update: Update, context: CallbackContext):
         try:
             context.bot.send_message(
                 chat_id=user.id,
-                text="*🟢 Choose Desire App To Claim 🟢*\n\n"
-                     "*🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!*\n\n"
-                     "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
-                     "*⚠️ Warning : Expired gift code will refresh in a few hours ⏰ Please wait patiently 🔐!!*",
+                text="🟢 Choose Desire App To Claim 🟢\n\n"
+                     "🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!\n\n"
+                     "🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓",
                 reply_markup=reply_markup,
                 parse_mode=ParseMode.MARKDOWN
             )
@@ -188,7 +187,7 @@ def handle_app_buttons(update: Update, context: CallbackContext):
             promo_message = (
                 "*ᴄʟᴀɪᴍ ᴅɪᴜᴡɪɴ ɢɪꜰᴛ ᴄᴏᴅᴇ 🤞💚*\n\n"
                 f"*ɢɪꜰᴛ ᴄᴏᴅᴇ* 👉 `{codes['diuwin']}`\n\n"
-                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* *https://www.6diuwin.com/#/register?invitationCode=328149554356*\n\n"
+                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* https://www.6diuwin.com/#/register?invitationCode=328149554356\n\n"
                 "*⚠️ ᴍᴜꜱᴛ ʀᴇɢɪꜱᴛᴇʀ ᴜɴᴅᴇʀ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ᴛᴏ ᴄʟᴀɪᴍ ɢɪꜰᴛ ᴄᴏᴅᴇ 🎁*"
             )
             context.bot.send_photo(
@@ -202,7 +201,7 @@ def handle_app_buttons(update: Update, context: CallbackContext):
             promo_message = (
                 "*ᴄʟᴀɪᴍ ᴊᴀʟᴡᴀ ɢᴀᴍᴇ ɢɪꜰᴛ ᴄᴏᴅᴇ 🤞💙*\n\n"
                 f"*ɢɪꜰᴛ ᴄᴏᴅᴇ* 👉 `{codes['jalwa']}`\n\n"
-                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* *https://www.jalwa.live/#/register?invitationCode=78831216537*\n\n"
+                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* https://www.jalwa.live/#/register?invitationCode=78831216537\n\n"
                 "*⚠️ ᴍᴜꜱᴛ ʀᴇɢɪꜱᴛᴇʀ ᴜɴᴅᴇʀ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ᴛᴏ ᴄʟᴀɪᴍ ɢɪꜰᴛ ᴄᴏᴅᴇ 🎁*"
             )
             context.bot.send_photo(
@@ -216,7 +215,7 @@ def handle_app_buttons(update: Update, context: CallbackContext):
             promo_message = (
                 "*ᴄʟᴀɪᴍ ᴛᴀꜱʜᴀɴ ᴡɪɴ ɢɪꜰᴛ ᴄᴏᴅᴇ 🤞🤎*\n\n"
                 f"*ɢɪꜰᴛ ᴄᴏᴅᴇ* 👉 `{codes.get('tashan', 'E13C37DF85131FACFECD5FAC28AD073E')}`\n\n"
-                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* *https://www.tashanwin.net/#/register?invitationCode=48588452704*\n\n"
+                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* https://www.tashanwin.net/#/register?invitationCode=48588452704\n\n"
                 "*⚠️ ᴍᴜꜱᴛ ʀᴇɢɪꜱᴛᴇʀ ᴜɴᴅᴇʀ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ᴛᴏ ᴄʟᴀɪᴍ ɢɪꜰᴛ ᴄᴏᴅᴇ 🎁*"
             )
             context.bot.send_photo(
@@ -280,8 +279,7 @@ def handle_app_buttons(update: Update, context: CallbackContext):
                 chat_id=user.id,
                 text="🟢 Choose Desire App To Claim 🟢\n\n"
                      "🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!\n\n"
-                     "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
-                     "*⚠️ Warning : Expired gift code will refresh in a few hours ⏰ Please wait patiently 🔐!!*",
+                     "🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓",
                 reply_markup=reply_markup,
                 parse_mode=ParseMode.MARKDOWN
             )
