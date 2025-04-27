@@ -129,7 +129,7 @@ def join_button_callback(update: Update, context: CallbackContext):
                 text="*🟢 Choose Desire App To Claim 🟢*\n\n"
                      "*🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!*\n\n"
                      "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
-                     "*⚠️ Expired gift code will refresh in a few hours ⏰ !!*",
+                     "*⚠️ Warning : Expired gift code will refresh in a few hours ⏰ Please wait patiently 🔐!!*",
                 reply_markup=reply_markup,
                 parse_mode=ParseMode.MARKDOWN
             )
@@ -280,7 +280,8 @@ def handle_app_buttons(update: Update, context: CallbackContext):
                 chat_id=user.id,
                 text="🟢 Choose Desire App To Claim 🟢\n\n"
                      "🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!\n\n"
-                     "🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓",
+                     "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
+                     "*⚠️ Warning : Expired gift code will refresh in a few hours ⏰ Please wait patiently 🔐!!*",
                 reply_markup=reply_markup,
                 parse_mode=ParseMode.MARKDOWN
             )
