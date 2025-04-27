@@ -278,8 +278,8 @@ def handle_app_buttons(update: Update, context: CallbackContext):
 
             context.bot.send_message(
                 chat_id=user.id,
-                text="🟢 Choose Desire App To Claim 🟢\n\n"
-                     "🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!\n\n"
+                text="*🟢 Choose Desire App To Claim 🟢*\n\n"
+                     "*🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!*\n\n"
                      "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
                      "*⚠️ Warning : Expired gift code will refresh in a few hours ⏰ Please wait patiently 🔐!!*",
                 reply_markup=reply_markup,
