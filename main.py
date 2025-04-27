@@ -16,7 +16,7 @@ BOT_TOKEN = '7679605071:AAFVQ2VNf5q-Ce0ev5YGDYj7H_Y6SB2gEQA'
 ADMIN_ID = 6490401448
 
 # Initialize empty channels list
-REQUIRED_CHANNELS = []
+REQUIRED_CHANNELS = [1002629702845,1002436175379,1002125928281]
 
 # MongoDB connection
 MONGO_URI = "mongodb+srv://giftcodebot:giftcodebotpass@giftcodebot.n3wkcog.mongodb.net/?retryWrites=true&w=majority&appName=giftcodebot"
