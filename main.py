@@ -16,7 +16,7 @@ BOT_TOKEN = '7679605071:AAFVQ2VNf5q-Ce0ev5YGDYj7H_Y6SB2gEQA'
 ADMIN_ID = 6490401448
 
 # Initialize empty channels list
-REQUIRED_CHANNELS = []
+REQUIRED_CHANNELS = [1002629702845,1002436175379,1002125928281]
 
 # MongoDB connection
 MONGO_URI = "mongodb+srv://giftcodebot:giftcodebotpass@giftcodebot.n3wkcog.mongodb.net/?retryWrites=true&w=majority&appName=giftcodebot"
@@ -126,9 +126,10 @@ def join_button_callback(update: Update, context: CallbackContext):
         try:
             context.bot.send_message(
                 chat_id=user.id,
-                text="🟢 Choose Desire App To Claim 🟢\n\n"
-                     "🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!\n\n"
-                     "🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓",
+                text="*🟢 Choose Desire App To Claim 🟢*\n\n"
+                     "*🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!*\n\n"
+                     "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
+                     "*⚠️ Warning : Expired gift code will refresh in a few hours ⏰ Please wait patiently 🔐!!*",
                 reply_markup=reply_markup,
                 parse_mode=ParseMode.MARKDOWN
             )
@@ -187,7 +188,7 @@ def handle_app_buttons(update: Update, context: CallbackContext):
             promo_message = (
                 "*ᴄʟᴀɪᴍ ᴅɪᴜᴡɪɴ ɢɪꜰᴛ ᴄᴏᴅᴇ 🤞💚*\n\n"
                 f"*ɢɪꜰᴛ ᴄᴏᴅᴇ* 👉 `{codes['diuwin']}`\n\n"
-                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* https://www.6diuwin.com/#/register?invitationCode=328149554356\n\n"
+                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* *https://www.6diuwin.com/#/register?invitationCode=328149554356*\n\n"
                 "*⚠️ ᴍᴜꜱᴛ ʀᴇɢɪꜱᴛᴇʀ ᴜɴᴅᴇʀ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ᴛᴏ ᴄʟᴀɪᴍ ɢɪꜰᴛ ᴄᴏᴅᴇ 🎁*"
             )
             context.bot.send_photo(
@@ -201,7 +202,7 @@ def handle_app_buttons(update: Update, context: CallbackContext):
             promo_message = (
                 "*ᴄʟᴀɪᴍ ᴊᴀʟᴡᴀ ɢᴀᴍᴇ ɢɪꜰᴛ ᴄᴏᴅᴇ 🤞💙*\n\n"
                 f"*ɢɪꜰᴛ ᴄᴏᴅᴇ* 👉 `{codes['jalwa']}`\n\n"
-                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* https://www.jalwa.live/#/register?invitationCode=78831216537\n\n"
+                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* *https://www.jalwa.live/#/register?invitationCode=78831216537*\n\n"
                 "*⚠️ ᴍᴜꜱᴛ ʀᴇɢɪꜱᴛᴇʀ ᴜɴᴅᴇʀ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ᴛᴏ ᴄʟᴀɪᴍ ɢɪꜰᴛ ᴄᴏᴅᴇ 🎁*"
             )
             context.bot.send_photo(
@@ -215,7 +216,7 @@ def handle_app_buttons(update: Update, context: CallbackContext):
             promo_message = (
                 "*ᴄʟᴀɪᴍ ᴛᴀꜱʜᴀɴ ᴡɪɴ ɢɪꜰᴛ ᴄᴏᴅᴇ 🤞🤎*\n\n"
                 f"*ɢɪꜰᴛ ᴄᴏᴅᴇ* 👉 `{codes.get('tashan', 'E13C37DF85131FACFECD5FAC28AD073E')}`\n\n"
-                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* https://www.tashanwin.net/#/register?invitationCode=48588452704\n\n"
+                "*✅ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ::* *https://www.tashanwin.net/#/register?invitationCode=48588452704*\n\n"
                 "*⚠️ ᴍᴜꜱᴛ ʀᴇɢɪꜱᴛᴇʀ ᴜɴᴅᴇʀ ᴏꜰꜰɪᴄɪᴀʟ ʀᴇɢɪꜱᴛᴇʀ ʟɪɴᴋ ᴛᴏ ᴄʟᴀɪᴍ ɢɪꜰᴛ ᴄᴏᴅᴇ 🎁*"
             )
             context.bot.send_photo(
@@ -279,7 +280,8 @@ def handle_app_buttons(update: Update, context: CallbackContext):
                 chat_id=user.id,
                 text="🟢 Choose Desire App To Claim 🟢\n\n"
                      "🎁 Claim Big Promo Codes And Get Upto ₹1 ~ ₹999 Random Amount !!\n\n"
-                     "🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓",
+                     "*🎁 Must Active In All Channels To Get Daily Big Earning Promo Codes ✓✓*\n\n"
+                     "*⚠️ Warning : Expired gift code will refresh in a few hours ⏰ Please wait patiently 🔐!!*",
                 reply_markup=reply_markup,
                 parse_mode=ParseMode.MARKDOWN
             )
