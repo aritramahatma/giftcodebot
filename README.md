@@ -1,6 +1,6 @@
 A fully automated, Python-powered Telegram Bot to deliver Free Gift Codes and provide Colour Prediction Hacks!
-**Manage your users easily, broadcast updates, and set new codes — all from your Telegram account!
-**
+Manage your users easily, broadcast updates, and set new codes — all from your Telegram account!
+
 ✨ Features
 
 🎁 Gift Code Provider
