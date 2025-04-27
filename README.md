@@ -1,11 +1,16 @@
 A fully automated, Python-powered Telegram Bot to deliver Free Gift Codes and provide Colour Prediction Hacks!
 Manage your users easily, broadcast updates, and set new codes — all from your Telegram account!
+
 ✨ Features
+
 🎁 Gift Code Provider
-🎨 Colour Prediction Hack Helper
+
 🔧 Admin Tools for managing channels and codes
+
 📊 Bot Statistics tracking users and activity
+
 📢 Broadcast System to reach all users
+
 🛠️ Commands & Usage
 
 User Commands:
@@ -41,15 +46,24 @@ Admin Commands:
 🚀 Deployment Instructions
 
 Clone the repository.
+
 Install requirements:
+
 pip install -r requirements.txt 
 
 Update your config.py with:
+
 1.Bot Token
+
 2.API ID / API HASH
+
 3.MongoDB URI
+
 Run the bot and start providing codes!
+
+
 ⚠️ Disclaimer
+
 This bot is made only for educational and entertainment purposes.
 We are not responsible for any misuse or illegal activity.
 
