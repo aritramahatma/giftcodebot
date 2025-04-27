@@ -15,18 +15,29 @@ User Commands:
 Admin Commands:
 
 /set_channel — ➕ Add a new update channel.
+
 /removechannel — ➖ Remove an existing channel.
+
 /setdiuwin — 🎯 Set Gift Code for "DIU" game.
+
 /setjalwagame — 🎯 Set Gift Code for "Jalwa" game.
+
 /settashanwin — 🎯 Set Gift Code for "Tashan" game.
+
 /cast — 📢 Broadcast a message to all users.
+
 /stats — 📊 View bot statistics and user count.
 
 ⚙️ Built With
+
 🐍 Python 3.10+
+
 📡 Pyrogram / Telethon (Telegram API)
+
 🛢️ MongoDB (Database)
+
 ☁️ Deployable on Replit, VPS, Heroku, etc.
+
 🚀 Deployment Instructions
 
 Clone the repository.
